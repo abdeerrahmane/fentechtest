@@ -18,7 +18,7 @@ class User extends Authenticatable
         'name','prenom', 'email', 'numero_tel','password'
     ];
 
-    public function menu()
+    public function menus()
 	{
 		return $this->belongsToMany('App\Menu');
 	} 
@@ -31,4 +31,5 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
 }

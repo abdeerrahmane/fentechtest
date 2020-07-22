@@ -4,16 +4,28 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class menu extends Model
+class Menu extends Model
 {
-    //
-    public function contenu()
+	//
+	
+	public $timestamps = true;
+	
+	protected $fillable = [
+        'titre_menu'
+    ];
+
+ 	public function types()
 	{
-		return $this->hasMany('App\Contenu');
-    }
-    public function user()
+		return $this->hasMany('App\Type');
+	}
+	
+    public function users()
 	{
 		return $this->belongsToMany('App\User');
 	} 
+	
+
+
+    
 
 }

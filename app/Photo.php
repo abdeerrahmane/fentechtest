@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Photo extends Model
 {
     //
+    public function contenu()
+	{
+		return $this->hasMany('App\Contenu');
+	}
 }

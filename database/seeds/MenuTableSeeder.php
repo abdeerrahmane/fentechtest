@@ -15,7 +15,6 @@ class menuTableSeeder extends Seeder {
 			
 			DB::table('menus')->insert(array(
 					'titre_menu' => 'titre1' . $i,
-					
 				));
 		}
 	}

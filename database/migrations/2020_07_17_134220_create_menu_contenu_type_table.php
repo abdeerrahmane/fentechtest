@@ -18,14 +18,15 @@ class CreateMenuContenuTypeTable extends Migration
             $table->timestamps();
             $table->string('titre', 250);
             $table->double('prix');
-            $table->integer('menu_id')->unsigned();
             $table->integer('photo_id')->unsigned();
             $table->integer('type_id')->unsigned();
         });
         Schema::create('types', function(Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
-			$table->string('type_menu', 250)->unique();
+            $table->string('type_menu', 250);
+            $table->integer('menu_id')->unsigned();
+          
         });
         Schema::create('photos', function(Blueprint $table) {
 			$table->increments('id');
@@ -37,13 +38,16 @@ class CreateMenuContenuTypeTable extends Migration
 			
             $table->foreign('photo_id')->references('id')->on('photos')
 						->onDelete('restrict')
-                        ->onUpdate('restrict');  
-            $table->foreign('menu_id')->references('id')->on('menus')
-						->onDelete('restrict')
-                        ->onUpdate('restrict');    
+                        ->onUpdate('restrict');     
             $table->foreign('type_id')->references('id')->on('type_menu')
 						->onDelete('restrict')
                         ->onUpdate('restrict');      
+        });
+        Schema::table('types', function(Blueprint $table) {
+            $table->foreign('menu_id')->references('id')->on('menus')
+            ->onDelete('restrict')
+            ->onUpdate('restrict'); 
+                
 		});
     }
 
@@ -55,8 +59,8 @@ class CreateMenuContenuTypeTable extends Migration
     public function down()
     {
         //
-        Schema::table('contenus', function(Blueprint $table) {
-			$table->dropForeign('contenu_menu_menu_id_foreign');
+        Schema::table('types', function(Blueprint $table) {
+			$table->dropForeign('types_menu_id_foreign');
         });
         Schema::table('contenus', function(Blueprint $table) {
 			$table->dropForeign('contenus_photo_id_foreign');
@@ -65,9 +69,6 @@ class CreateMenuContenuTypeTable extends Migration
 			$table->dropForeign('contenus_type_id_foreign');
         });
 
-        Schema::table('contenu_menu', function(Blueprint $table) {
-			$table->dropForeign('contenus_menu_id_foreign');
-		});
         Schema::drop('contenus');
 		Schema::drop('types');
 		Schema::drop('photos');

@@ -26,19 +26,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Menu::class, function (Faker\Generator $faker) {
-    return [
-        'titre_menu' => $faker->name,
-    ];
-});
+
 
 $factory->define(App\Contenu::class, function (Faker\Generator $faker) {
     return [
-        'titre' => $faker->chrome ,
+        'titre' => $faker->name ,
         'prix' => $faker->numberBetween(1, 4000),
-        'photo_id' => $faker->numberBetween(1, 40),
-        'menu_id' => $faker->numberBetween(1, 40),
-        'type_id' => $faker->numberBetween(1, 40)
+        'photo_id' => $faker->numberBetween(1, 10),
+        'menu_id' => $faker->numberBetween(241, 280),
+        'type_id' => $faker->numberBetween(1, 10)
 
     ];
 });
